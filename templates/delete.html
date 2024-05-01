@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete User</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .delete-btn {
+            background-color: green;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            padding: 10px 20px; /* Adjust padding for larger button */
+            border: none;
+            border-radius: 5px;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Delete User</h1>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="delete-btn">Delete Selected Users</button>
+        <table>
+            <thead>
+                <tr>
+                    <th>Select</th>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Email</th>
+                    <th>Contact</th>
+                    <th>Gender</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td>
+                        <input type="checkbox" name="user_ids" value="{{ user.id }}">
+                    </td>
+                    <td>{{ user.full_name }}</td>
+                    <td>{{ user.address }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.contact }}</td>
+                    <td>{{ user.gender }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </form>
+</body>
+</html>
